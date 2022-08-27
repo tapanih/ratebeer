@@ -11,7 +11,11 @@
 
   <p>
     <strong>Brewery:</strong>
-    <%= beer.brewery_id %>
+    <%= link_to beer.brewery.name, beer.brewery %>
   </p>
 
+  <% if beer.ratings.present? %>
+    Beer has <%= pluralize beer.ratings.count, "rating" %>
+    with an average of <%= beer.average_rating %>.
+  <% end %>
 </div>
