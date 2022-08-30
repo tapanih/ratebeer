@@ -10,9 +10,9 @@ class Brewery < ApplicationRecord
                                    only_integer: true }
 
   def year_of_establisment_cannot_be_in_the_future
-    if year.present? && year > Time.now.year
-      errors.add(:year, "can't be in the future")
-    end
+    return if year.blank? || year <= Date.current.year
+
+    errors.add(:year, "can't be in the future")
   end
 
   def print_report
