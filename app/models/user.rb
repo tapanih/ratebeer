@@ -12,6 +12,25 @@ class User < ApplicationRecord
             length: { minimum: 4 },
             format: { with: /\d.*[A-Z]|[A-Z].*\d/, message: "must contain a number and an uppercase letter" }
 
+  def favorite_beer
+    return nil if ratings.empty?
+
+    ratings.order(score: :desc).limit(1).first.beer
+  end
+
+  def favorite_style
+    return nil if ratings.empty?
+
+    ratings.joins(:beer).group(:style).average(:score).max_by { |_, v| v }.first
+  end
+
+  def favorite_brewery
+    return nil if ratings.empty?
+
+    brewery_id = ratings.joins(:beer).group(:brewery_id).average(:score).max_by { |_, v| v }.first
+    Brewery.find(brewery_id)
+  end
+
   def to_s
     username
   end

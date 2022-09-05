@@ -9,11 +9,14 @@ class RatingsController < ApplicationController
   end
 
   def create
+    return redirect_to signin_path, notice: 'You need to sign in first' if current_user.nil?
+
     @rating = Rating.new params.require(:rating).permit(:score, :beer_id)
+
     @rating.user = current_user
 
     if @rating.save
-      redirect_to user_path current_user
+      redirect_to current_user
     else
       @beers = Beer.all
       render :new, status: :unprocessable_entity

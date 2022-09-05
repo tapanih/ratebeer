@@ -11,4 +11,6 @@
   <% end %>
 </ul>
 
-<%= link_to "New rating", new_rating_path %>
+<% if current_user.present? %>
+  <%= link_to "New rating", new_rating_path %>
+<% end %>
