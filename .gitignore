@@ -36,3 +36,6 @@
 
 #Ignore coverage report
 /coverage
+
+# Ignore secrets file
+.env
