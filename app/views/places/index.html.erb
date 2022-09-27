@@ -7,6 +7,19 @@
   <%= form.submit "Search" %>
 <% end %>
 
+<% if @weather %>
+  <h3>The current beer weather in <%= @weather.location %></h3>
+  <p>
+    <strong>Temperature:</strong>
+    <%= @weather.temperature %> &#8451;
+  </p>
+  <img src="<%= @weather.weather_icons.first %>" alt="<%= @weather.weather_descriptions.first %>">
+  <p>
+    <strong>Wind:</strong>
+    <%= @weather.wind_speed %>, direction: <%= @weather.wind_dir %>
+  </p>
+<% end %>
+
 <% if @places %>
   <table>
     <thead>
