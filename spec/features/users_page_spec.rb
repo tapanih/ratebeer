@@ -37,7 +37,7 @@ describe "User" do
   describe "who has rated beers" do
     it "has his favorite style and brewery shown on his page" do
       brewery = FactoryBot.create :brewery, name: "Koff"
-      beer = FactoryBot.create :beer, style: "Lager", brewery: brewery
+      beer = FactoryBot.create :beer, old_style: "Lager", brewery: brewery
       FactoryBot.create :rating, score: 10, beer: beer, user: @user
 
       visit user_path(@user)

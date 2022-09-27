@@ -12,7 +12,7 @@ FactoryBot.define do
 
   factory :beer do
     name { "anonymous" }
-    style { "Lager" }
+    old_style { "Lager" }
     brewery
   end
 

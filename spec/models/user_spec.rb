@@ -134,7 +134,7 @@ end
 def create_beer_with_rating(object, score)
   style = object[:style] || "Lager"
   brewery = object[:brewery] || FactoryBot.create(:brewery)
-  beer = FactoryBot.create(:beer, style: style, brewery: brewery)
+  beer = FactoryBot.create(:beer, old_style: style, brewery: brewery)
   FactoryBot.create(:rating, beer: beer, score: score, user: object[:user])
   beer
 end
