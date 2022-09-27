@@ -9,6 +9,7 @@ describe "Beer" do
   end
 
   let!(:brewery) { FactoryBot.create :brewery, name: "Koff" }
+  let!(:style) { FactoryBot.create :style }
 
   it "can be created with a valid name" do
     visit new_beer_path
