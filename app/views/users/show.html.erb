@@ -20,7 +20,7 @@
 
 <p>
   <% if @user.ratings.present? %>
-    Has made <%= pluralize @user.ratings.count, "rating" %>, average rating <%= @user.average_rating %>
+    Has made <%= pluralize @user.ratings.count, "rating" %>, average rating <%= round(@user.average_rating) %>
   <% else %>
     Has not made any ratings
   <% end %>

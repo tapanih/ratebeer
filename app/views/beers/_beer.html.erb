@@ -16,6 +16,6 @@
 
   <% if beer.ratings.present? %>
     Beer has <%= pluralize beer.ratings.count, "rating" %>
-    with an average of <%= beer.average_rating %>.
+    with an average of <%= round(beer.average_rating) %>.
   <% end %>
 </div>

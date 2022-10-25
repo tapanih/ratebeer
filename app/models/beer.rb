@@ -1,5 +1,6 @@
 class Beer < ApplicationRecord
   include RatingAverage
+  extend TopByAverageRating
 
   belongs_to :brewery
   belongs_to :style

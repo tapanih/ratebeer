@@ -1,0 +1,16 @@
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th><%= name %></th>
+    <th>Average</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% items.each do |item| %>
+    <tr>
+      <th><%= item.name %></th>
+      <th><%= round(item.average_rating) %></th>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

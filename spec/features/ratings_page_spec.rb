@@ -35,13 +35,12 @@ describe "Rating" do
       FactoryBot.create :rating, score: 25, beer: beer2, user: user2
     end
 
-    it "ratings page lists the ratings and their total number" do
+    it "ratings page lists recent ratings" do
       visit ratings_path
 
-      expect(page).to have_content "Ratings count: 3"
-      expect(page).to have_content "Iso 3 15 Pekka"
-      expect(page).to have_content "Karhu 20 Pekka"
-      expect(page).to have_content "Karhu 25 Matti"
+      expect(page).to have_content "Iso 3 15"
+      expect(page).to have_content "Karhu 20"
+      expect(page).to have_content "Karhu 25"
     end
 
     it "user page shows information about user's ratings" do

@@ -32,6 +32,10 @@ class User < ApplicationRecord
     Brewery.find(brewery_id)
   end
 
+  def self.top_by_ratings_count(count)
+    User.all.sort_by { |u| -u.ratings.count }.take(count)
+  end
+
   def to_s
     username
   end

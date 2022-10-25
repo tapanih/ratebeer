@@ -12,9 +12,7 @@
 
 <div>
   <% if current_user %>
-    <%= link_to "Edit this beer", edit_beer_path(@beer) %> |
+    <%= edit_and_destroy_buttons(@beer) %>
   <% end %>
   <%= link_to "Back to beers", beers_path %>
-
-  <%= button_to("Destroy this beer", @beer, method: :delete) if current_user %>
 </div>
