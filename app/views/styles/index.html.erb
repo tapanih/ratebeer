@@ -1,5 +1,3 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Styles</h1>
 
 <div id="styles">
@@ -18,4 +16,4 @@
   <% end %>
 </div>
 
-<%= link_to("New style", new_style_path) if current_user %>
+<%= link_to("New style", new_style_path, class: "btn btn-primary") if current_user %>

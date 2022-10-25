@@ -1,5 +1,3 @@
-<p style="color: green"><%= notice %></p>
-
 <%= render @beer %>
 
 <% if current_user %>
@@ -8,7 +6,7 @@
   <%= form_with(model: @rating) do |form| %>
     <%= form.hidden_field :beer_id %>
     score: <%= form.number_field :score %>
-    <%= form.submit "Create rating" %>
+    <%= form.submit "Create rating", class: "btn btn-primary" %>
   <% end %>
 <% end %>
 
