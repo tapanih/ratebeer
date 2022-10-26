@@ -32,6 +32,14 @@ describe "User" do
       expect(current_path).to eq(signin_path)
       expect(page).to have_content "Username and password do not match"
     end
+
+    it "is redirected back to signin form if user is closed" do
+      @user.update_attribute :closed, true
+      sign_in(username: "Pekka", password: "Foobar1")
+
+      expect(current_path).to eq(signin_path)
+      expect(page).to have_content "Your account is closed"
+    end
   end
 
   describe "who has rated beers" do

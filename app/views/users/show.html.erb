@@ -1,30 +1,4 @@
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
-
-<p>
-  <strong>Favorite beer:</strong>
-  <%= @user.favorite_beer %>
-</p>
-
-<p>
-  <strong>Favorite style:</strong>
-  <%= @user.favorite_style %>
-</p>
-
-<p>
-  <strong>Favorite brewery:</strong>
-  <%= @user.favorite_brewery %>
-</p>
-
-<p>
-  <% if @user.ratings.present? %>
-    Has made <%= pluralize @user.ratings.count, "rating" %>, average rating <%= round(@user.average_rating) %>
-  <% else %>
-    Has not made any ratings
-  <% end %>
-</p>
+<%= render @user %>
 
 <h3>Member of</h3>
 
@@ -53,6 +27,12 @@
     </li>
   <% end %>
 </ul>
+
+<div>
+  <% if @user != current_user && current_user&.admin %>
+    <%= link_to @user.closed ? "Open account" : "Close account", toggle_closed_user_path(@user.id), data: { turbo_method: "post" }, class: "btn btn-danger" %>
+  <% end %>
+</div>
 
 <div>
   <% if @user == current_user %>

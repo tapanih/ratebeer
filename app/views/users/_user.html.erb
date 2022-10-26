@@ -1,7 +1,37 @@
 <div id="<%= dom_id user %>">
+
+  <h3>Username: <%= user.username %>
+    <% if current_user&.admin && user.closed %>
+      <span class="badge bg-danger">closed</span>
+    <% end %>
+  </h3>
+
   <p>
-    <strong>Username:</strong>
-    <%= user.username %>
+    <% if user.ratings.present? %>
+      Has made <%= pluralize user.ratings.count, "rating" %>, average rating <%= round(user.average_rating) %>
+    <% else %>
+      Has not made any ratings.
+    <% end %>
   </p>
 
+  <% if user.favorite_beer.present? %>
+    <p>
+      <strong>Favorite beer:</strong>
+      <%= user.favorite_beer %>
+    </p>
+  <% end %>
+
+  <% if user.favorite_beer.present? %>
+    <p>
+      <strong>Favorite style:</strong>
+      <%= user.favorite_style %>
+    </p>
+  <% end %>
+
+  <% if user.favorite_beer.present? %>
+    <p>
+      <strong>Favorite brewery:</strong>
+      <%= user.favorite_brewery %>
+    </p>
+  <% end %>
 </div>
