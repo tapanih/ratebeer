@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
       return
     end
     if user&.authenticate(params[:password])
+      mitigate_session_fixation
       session[:user_id] = user.id
       redirect_to user, notice: "Welcome back!"
     else
@@ -19,5 +20,11 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     redirect_to :root
+  end
+
+  def mitigate_session_fixation
+    old_values = session.to_hash
+    reset_session
+    session.update old_values.except('session_id')
   end
 end
