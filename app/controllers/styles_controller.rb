@@ -1,6 +1,7 @@
 class StylesController < ApplicationController
   before_action :set_style, only: %i[show edit update destroy]
   before_action :ensure_that_signed_in, except: %i[index show]
+  before_action :ensure_that_admin, only: %i[destroy]
 
   # GET /styles or /styles.json
   def index
@@ -53,7 +54,7 @@ class StylesController < ApplicationController
     @style.destroy
 
     respond_to do |format|
-      format.html { redirect_to styles_url, notice: "Style was successfully destroyed." }
+      format.html { redirect_to styles_url, status: :see_other, notice: "Style was successfully destroyed." }
       format.json { head :no_content }
     end
   end

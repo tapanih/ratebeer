@@ -1,6 +1,7 @@
 class BreweriesController < ApplicationController
   before_action :set_brewery, only: %i[show edit update destroy]
   before_action :ensure_that_signed_in, except: %i[index show]
+  before_action :ensure_that_admin, only: %i[destroy]
 
   # GET /breweries or /breweries.json
   def index
@@ -64,7 +65,7 @@ class BreweriesController < ApplicationController
     @brewery.destroy
 
     respond_to do |format|
-      format.html { redirect_to breweries_url, notice: "Brewery was successfully destroyed." }
+      format.html { redirect_to breweries_url, status: :see_other, notice: "Brewery was successfully destroyed." }
       format.json { head :no_content }
     end
   end

@@ -2,6 +2,7 @@ class BeersController < ApplicationController
   before_action :set_beer, only: %i[show edit update destroy]
   before_action :set_breweries_and_styles_for_template, only: %i[new edit create update]
   before_action :ensure_that_signed_in, except: %i[index show]
+  before_action :ensure_that_admin, only: %i[destroy]
 
   # GET /beers or /beers.json
   def index
@@ -56,7 +57,7 @@ class BeersController < ApplicationController
     @beer.destroy
 
     respond_to do |format|
-      format.html { redirect_to beers_url, notice: "Beer was successfully destroyed." }
+      format.html { redirect_to beers_url, status: :see_other, notice: "Beer was successfully destroyed." }
       format.json { head :no_content }
     end
   end

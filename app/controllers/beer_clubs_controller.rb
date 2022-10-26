@@ -1,6 +1,7 @@
 class BeerClubsController < ApplicationController
   before_action :set_beer_club, only: %i[show edit update destroy]
   before_action :ensure_that_signed_in, except: %i[index show]
+  before_action :ensure_that_admin, only: %i[destroy]
 
   # GET /beer_clubs or /beer_clubs.json
   def index
@@ -56,7 +57,7 @@ class BeerClubsController < ApplicationController
     @beer_club.destroy
 
     respond_to do |format|
-      format.html { redirect_to beer_clubs_url, notice: "Beer club was successfully destroyed." }
+      format.html { redirect_to beer_clubs_url, status: :see_other, notice: "Beer club was successfully destroyed." }
       format.json { head :no_content }
     end
   end
