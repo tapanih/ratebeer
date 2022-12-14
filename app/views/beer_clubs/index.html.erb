@@ -1,23 +1,23 @@
 <h1>Beer clubs</h1>
 
 <table class="table table-hover" id="beer_clubs">
-  <thead>
+  <thead class="table-light">
   <tr>
-    <th>Name</th>
-    <th>Founded</th>
-    <th>City</th>
+    <th scope="col"><%= link_to "Name", beer_clubs_path(order: "name") %></th>
+    <th scope="col"><%= link_to "Founded", beer_clubs_path(order: "founded") %></th>
+    <th scope="col"><%= link_to "City", beer_clubs_path(order: "city") %></th>
   </tr>
   </thead>
   <tbody>
   <% @beer_clubs.each do |beer_club| %>
     <tr id="<%= dom_id beer_club %>">
-      <th>
+      <th scope="row">
         <%= link_to beer_club.name, beer_club %>
       </th>
-      <th>
+      <th scope="row">
         <%= beer_club.founded %>
       </th>
-      <th>
+      <th scope="row">
         <%= beer_club.city %>
       </th>
     </tr>

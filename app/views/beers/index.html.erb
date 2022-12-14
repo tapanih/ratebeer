@@ -1,21 +1,21 @@
 <h1>Beers</h1>
 
 <table class="table table-hover" id="beers">
-  <thead>
+  <thead class="table-light">
   <tr>
-    <th>Beer</th>
-    <th>Style</th>
-    <th>Brewery</th>
-    <th>Rating</th>
+    <th scope="col"><%= link_to "Name", beers_path(order: "name") %></th>
+    <th scope="col"><%= link_to "Style", beers_path(order: "style") %></th>
+    <th scope="col"><%= link_to "Brewery", beers_path(order: "brewery") %></th>
+    <th scope="col"><%= link_to "Rating", beers_path(order: "rating") %></th>
   </tr>
   </thead>
   <tbody>
   <% @beers.each do |beer| %>
     <tr id="<%= dom_id beer %>">
-      <th><%= link_to beer.name, beer %></th>
-      <th><%= link_to beer.style %></th>
-      <th><%= link_to beer.brewery.name, beer.brewery %></th>
-      <th><%= round(beer.average_rating) %></th>
+      <th scope="row"><%= link_to beer.name, beer %></th>
+      <th scope="row"><%= link_to beer.style %></th>
+      <th scope="row"><%= link_to beer.brewery.name, beer.brewery %></th>
+      <th scope="row"><%= round(beer.average_rating) %></th>
     </tr>
   <% end %>
   </tbody>
