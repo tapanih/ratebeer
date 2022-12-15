@@ -44,5 +44,29 @@ describe "Beerlist page" do
     expect(rows[1]).to have_content "Lechte Weisse"
     expect(rows[2]).to have_content "Nikolai"
   end
+
+  it "optionally shows beers in alphabetical order by brewery", js: true do
+    visit beerlist_path
+    find('.tablerow', match: :first)
+    find("span", text: "Brewery", exact_text: true).click
+
+    rows = find('#beertable').all('.tablerow')
+
+    expect(rows[0]).to have_content "Ayinger"
+    expect(rows[1]).to have_content "Koff"
+    expect(rows[2]).to have_content "Schlenkerla"
+  end
+
+  it "optionally shows beers in alphabetical order by style", js: true do
+    visit beerlist_path
+    find('.tablerow', match: :first)
+    find("span", text: "Style", exact_text: true).click
+
+    rows = find('#beertable').all('.tablerow')
+
+    expect(rows[0]).to have_content "Lager"
+    expect(rows[1]).to have_content "Rauchbier"
+    expect(rows[2]).to have_content "Weizen"
+  end
 end
 
