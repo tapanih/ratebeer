@@ -1,16 +1,20 @@
 class BreweriesController < ApplicationController
   before_action :set_brewery, only: %i[show edit update destroy]
-  before_action :ensure_that_signed_in, except: %i[index show]
+  before_action :ensure_that_signed_in, except: %i[index show list]
   before_action :ensure_that_admin, only: %i[destroy]
 
   # GET /breweries or /breweries.json
   def index
+    @breweries = Brewery.all
     @active_breweries = Brewery.active
     @retired_breweries = Brewery.retired
   end
 
   # GET /breweries/1 or /breweries/1.json
   def show
+  end
+
+  def list
   end
 
   # GET /breweries/new

@@ -1,7 +1,7 @@
 class BeersController < ApplicationController
   before_action :set_beer, only: %i[show edit update destroy]
   before_action :set_breweries_and_styles_for_template, only: %i[new edit create update]
-  before_action :ensure_that_signed_in, except: %i[index show]
+  before_action :ensure_that_signed_in, except: %i[index show list]
   before_action :ensure_that_admin, only: %i[destroy]
 
   # GET /beers or /beers.json
@@ -27,6 +27,9 @@ class BeersController < ApplicationController
 
   # GET /beers/1/edit
   def edit
+  end
+
+  def list
   end
 
   # POST /beers or /beers.json
