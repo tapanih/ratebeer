@@ -10,6 +10,13 @@
   <% end %>
 </ul>
 
+<h3>Applied membership of</h3>
+<% @user.pending_beer_clubs.each do |club| %>
+  <li>
+    <%= link_to club.name, club %>
+  </li>
+<% end %>
+
 <h3>Ratings</h3>
 <ul>
   <% @user.ratings.each do |rating| %>

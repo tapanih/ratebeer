@@ -10,7 +10,10 @@ Rails.application.routes.draw do
   end
   resources :ratings, only: [:index, :new, :create, :destroy]
   resource :session, only: [:new, :create, :destroy]
-  resources :memberships, only: [:new, :create, :destroy]
+  resources :memberships, only: [:new, :create, :destroy] do
+    post 'confirm', on: :member
+  end
+
   resources :places, only: [:index, :show]
 
   get 'signup', to: 'users#new'

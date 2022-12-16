@@ -1,5 +1,15 @@
 <%= render @beer_club %>
 
+<h3>Membership applications</h3>
+<div class="mb-3">
+  <% @beer_club.pending_memberships.each do |membership| %>
+    <div>
+      <%= link_to membership.user.username, membership.user %>
+      <%= link_to "Confirm", confirm_membership_path(membership.id), data: { turbo_method: "post" }, class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
+
 <% if current_user %>
   <div class="mb-3">
     <% if @current_membership %>

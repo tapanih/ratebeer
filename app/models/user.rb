@@ -4,8 +4,10 @@ class User < ApplicationRecord
   has_secure_password
   has_many :ratings, dependent: :destroy
   has_many :beers, through: :ratings
-  has_many :memberships, dependent: :destroy
+  has_many :memberships, -> { where confirmed: true }, dependent: :destroy
+  has_many :pending_memberships, -> { where confirmed: false }, class_name: "Membership", dependent: :destroy
   has_many :beer_clubs, through: :memberships
+  has_many :pending_beer_clubs, through: :pending_memberships, source: :beer_club
 
   validates :username, uniqueness: true, length: { in: 3..30 }
   validates :password,
