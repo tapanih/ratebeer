@@ -1,39 +1,62 @@
 <%= render @user %>
 
 <h3>Member of</h3>
-
-<ul>
-  <% @user.beer_clubs.each do |club| %>
-    <li>
-      <%= link_to club.name, club %>
-    </li>
-  <% end %>
-</ul>
+<% if @user.beer_clubs.present? %>
+  <ul>
+    <% @user.beer_clubs.each do |club| %>
+      <li>
+        <%= link_to club.name, club %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No memberships</p>
+<% end %>
 
 <h3>Applied membership of</h3>
-<% @user.pending_beer_clubs.each do |club| %>
-  <li>
-    <%= link_to club.name, club %>
-  </li>
+<% if @user.pending_beer_clubs.present? %>
+  <ul>
+    <% @user.pending_beer_clubs.each do |club| %>
+      <li>
+        <%= link_to club.name, club %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No open applications</p>
 <% end %>
 
 <h3>Ratings</h3>
-<ul>
+<table class="table table-striped table-hover">
+  <thead class="table-light">
+  <tr>
+    <th>Beer</th>
+    <th>Score</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
   <% @user.ratings.each do |rating| %>
-    <li> <%= render rating %>
-      <% if @user == current_user %>
-        <%= button_to 'delete',
-                      rating,
-                      method: :delete,
-                      form: {
-                        data: {
-                          turbo_confirm: "Are you sure you want to delete this rating?"
-                        }
-                      } %>
-      <% end %>
-    </li>
+    <tr>
+      <td><%= link_to rating.beer.name, rating.beer %></td>
+      <td><%= rating.score %></td>
+      <td>
+        <% if @user == current_user %>
+          <%= button_to 'delete',
+                        rating,
+                        method: :delete,
+                        class: 'btn btn-danger',
+                        form: {
+                          data: {
+                            turbo_confirm: "Are you sure you want to delete this rating?"
+                          }
+                        } %>
+        <% end %>
+      </td>
+    </tr>
   <% end %>
-</ul>
+  </tbody>
+</table>
 
 <div>
   <% if @user != current_user && current_user&.admin %>

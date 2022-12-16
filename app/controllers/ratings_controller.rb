@@ -16,7 +16,7 @@ class RatingsController < ApplicationController
 
   def new
     @rating = Rating.new
-    @beers = Beer.all
+    @beers = Beer.includes(:brewery)
   end
 
   def create
@@ -29,7 +29,7 @@ class RatingsController < ApplicationController
     if @rating.save
       redirect_to current_user
     else
-      @beers = Beer.all
+      @beers = Beer.includes(:brewery)
       render :new, status: :unprocessable_entity
     end
   end

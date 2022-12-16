@@ -56,7 +56,7 @@ describe "Rating" do
       visit user_path(user)
 
       expect {
-        within('li', text: 'Iso 3 15') do
+        within('tr', text: 'Iso 3') do
           click_button "delete"
         end
       }.to change { Rating.count }.from(3).to(2)

@@ -23,15 +23,26 @@
 </ul>
 
 <h4>Recent ratings</h4>
-<ul>
+<table class="table table-striped table-hover">
+  <thead>
+  <tr>
+    <th>Beer</th>
+    <th>Score</th>
+    <th>User</th>
+    <th>Time</th>
+  </tr>
+  </thead>
+  <tbody>
   <% @recent_ratings.each do |rating| %>
-    <li>
-      <%= render rating %>
-      <%= rating.created_at %>
-      <%= link_to rating.user.username, rating.user %>
-    </li>
+    <tr>
+      <td><%= link_to rating.beer.name, beer_path(rating.beer) %></td>
+      <td><%= rating.score %></td>
+      <td><%= link_to rating.user.username, user_path(rating.user) %></td>
+      <td><%= rating.created_at %></td>
+    </tr>
   <% end %>
-</ul>
+  </tbody>
+</table>
 
 <% if current_user.present? %>
   <%= link_to "New rating", new_rating_path, class: "btn btn-primary" %>

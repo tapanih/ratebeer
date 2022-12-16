@@ -3,7 +3,7 @@
 <div id="users">
   <% @users.each do |user| %>
     <%= link_to(user.username, user) %>
-    <p>Has made <%= "#{user.ratings.size}" %> ratings, average rating <%= "#{user.average_rating}" %></p>
+    <p>Has made <%= "#{user.ratings.size}" %> ratings, average rating <%= "#{round(user.average_rating)}" %></p>
     <% if user.closed %>
       <span class="badge text-bg-danger">account closed</span>
     <% end %>
