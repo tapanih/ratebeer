@@ -1,4 +1,6 @@
 class RatingsController < ApplicationController
+  before_action :expire_cache_for_breweries, only: %i[create destroy]
+
   def index
     @ratings = Rating.all
     @recent_ratings = Rating.recent

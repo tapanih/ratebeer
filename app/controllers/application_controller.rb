@@ -14,4 +14,8 @@ class ApplicationController < ActionController::Base
   def ensure_that_admin
     redirect_to signin_path, notice: 'you need to be admin to do that' unless current_user.admin?
   end
+
+  def expire_cache_for_breweries
+    expire_fragment('breweries')
+  end
 end
