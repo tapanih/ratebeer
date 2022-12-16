@@ -2,8 +2,9 @@ module RatingAverage
   extend ActiveSupport::Concern
 
   def average_rating
-    return 0 if ratings.empty?
+    ratings_count = ratings.size
 
-    ratings.map(&:score).sum / ratings.count.to_f
+    return 0 if ratings_count == 0
+    ratings.map(&:score).sum / ratings_count.to_f
   end
 end
