@@ -9,6 +9,6 @@ class Rating < ApplicationRecord
   scope :recent, -> { order(created_at: :desc).limit(5) }
 
   def to_s
-    beer.name << " " << score.to_s
+    "#{beer.name} #{score}"
   end
 end

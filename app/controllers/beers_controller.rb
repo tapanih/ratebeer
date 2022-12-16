@@ -12,7 +12,7 @@ class BeersController < ApplicationController
 
     @beers = Beer.includes(:brewery, :style, :ratings).all
     @beers = case @order
-             when "brewery" then @beers.all.sort_by { |b| b.brewery.name }
+             when "brewery" then @beers.sort_by { |b| b.brewery.name }
              when "style" then @beers.sort_by { |b| b.style.name }
              when "rating" then @beers.sort_by(&:average_rating).reverse
              else @beers.sort_by(&:name)

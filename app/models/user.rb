@@ -44,7 +44,7 @@ class User < ApplicationRecord
   end
 
   def self.top_by_ratings_count(count)
-    User.all.sort_by { |u| -u.ratings.count }.take(count)
+    User.includes(:ratings).sort_by { |u| -u.ratings.size }.take(count)
   end
 
   def to_s

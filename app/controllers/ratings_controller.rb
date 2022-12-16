@@ -2,12 +2,16 @@ class RatingsController < ApplicationController
   before_action :expire_cache_for_breweries, only: %i[create destroy]
 
   def index
-    @ratings = Rating.all
-    @recent_ratings = Rating.recent
-    @top_beers = Beer.top 3
-    @top_breweries = Brewery.top 3
-    @top_styles = Style.top 3
-    @top_users = User.top_by_ratings_count 3
+    if request.format.html?
+      expiration_time = 10.minutes
+      @recent_ratings = Rating.includes(:user, :beer).recent
+      @top_beers = Rails.cache.fetch("beer top 3", expires_in: expiration_time) { Beer.top(3) }
+      @top_breweries = Rails.cache.fetch("brewery top 3", expires_in: expiration_time) { Brewery.top(3) }
+      @top_styles = Rails.cache.fetch("style top 3", expires_in: expiration_time) { Style.top(3) }
+      @top_users = Rails.cache.fetch("user top 3", expires_in: expiration_time) { User.top_by_ratings_count(3) }
+    else
+      @ratings = Rating.all
+    end
   end
 
   def new

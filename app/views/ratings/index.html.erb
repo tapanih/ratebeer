@@ -18,7 +18,7 @@
 <h4>Most active users</h4>
 <ul>
   <% @top_users.each do |user| %>
-    <li><%= user.username %> (<%= user.ratings.count %> ratings)</li>
+    <li><%= user.username %> (<%= user.ratings.size %> ratings)</li>
   <% end %>
 </ul>
 
