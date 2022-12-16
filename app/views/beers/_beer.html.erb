@@ -1,21 +1,23 @@
-<div id="<%= dom_id beer %>">
-  <p>
-    <strong>Name:</strong>
-    <%= beer.name %>
-  </p>
+<% cache beer do %>
+  <div id="<%= dom_id beer %>">
+    <p>
+      <strong>Name:</strong>
+      <%= beer.name %>
+    </p>
 
-  <p>
-    <strong>Style:</strong>
-    <%= beer.style %>
-  </p>
+    <p>
+      <strong>Style:</strong>
+      <%= beer.style %>
+    </p>
 
-  <p>
-    <strong>Brewery:</strong>
-    <%= link_to beer.brewery.name, beer.brewery %>
-  </p>
+    <p>
+      <strong>Brewery:</strong>
+      <%= link_to beer.brewery.name, beer.brewery %>
+    </p>
 
-  <% if beer.ratings.present? %>
-    Beer has <%= pluralize beer.ratings.count, "rating" %>
-    with an average of <%= round(beer.average_rating) %>.
-  <% end %>
-</div>
+    <% if beer.ratings.present? %>
+      Beer has <%= pluralize beer.ratings.count, "rating" %>
+      with an average of <%= round(beer.average_rating) %>.
+    <% end %>
+  </div>
+<% end %>
